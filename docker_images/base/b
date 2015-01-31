@@ -1,0 +1,1 @@
+sudo docker build -t spreadsheetkit/base:1 .

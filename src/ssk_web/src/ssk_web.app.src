@@ -1,0 +1,12 @@
+{application, ssk_web,
+ [
+  {description, "Web server for Spreadsheetkit.com"},
+  {vsn, "1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  {mod, { ssk_web_app, []}},
+  {env, []}
+ ]}.
