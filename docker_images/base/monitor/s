@@ -1,0 +1,1 @@
+sudo docker run --rm -v `pwd`:/monitor -t -i spreadsheetkit/monitor:1.1 /bin/bash

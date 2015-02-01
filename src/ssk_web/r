@@ -1,2 +1,2 @@
 # Run base image mounting the current directory in /release
-sudo docker run --rm -v `pwd`:/release -t -i spreadsheetkit/base:1 /release/start
+sudo docker run --rm -v `pwd`:/release -t -i spreadsheetkit/base:1 /release/start_erl
