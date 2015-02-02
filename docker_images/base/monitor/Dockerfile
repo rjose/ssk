@@ -16,5 +16,16 @@ RUN apt-get install logstash
 # Install redis (logstash broker)
 RUN apt-get -y install redis-server
 
+# Install elasticsearch
+RUN wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.2.deb
+ENV JAVA_HOME /usr/lib/jvm/java-7-openjdk-amd64
+RUN dpkg -i elasticsearch-1.4.2.deb
+
+# Install curl
+RUN apt-get -y install curl
+
+# Add logstash config
+ADD central.conf /etc/logstash/conf.d/central.conf
+
 
 WORKDIR /monitor

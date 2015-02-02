@@ -1,1 +1,3 @@
 /etc/init.d/redis-server start
+/etc/init.d/elasticsearch start
+service logstash start
