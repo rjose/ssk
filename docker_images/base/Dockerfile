@@ -16,9 +16,11 @@ RUN apt-get install -y runit
 # Bootstrap the environment variables
 COPY runit_bootstrap /usr/sbin/runit_bootstrap
 
+
 # NOTE: This is an example of how to specify a service to run via runit
 # # Add sample
 # RUN mkdir -p /etc/service/hello/
 # COPY ./hello/run /etc/service/hello/run
+
 
 ENTRYPOINT ["/usr/sbin/runit_bootstrap"]
