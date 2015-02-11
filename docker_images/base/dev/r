@@ -1,0 +1,1 @@
+sudo docker run --name dev --link monitor:monitor --rm -t -i spreadsheetkit/dev:1.1
