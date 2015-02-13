@@ -14,3 +14,4 @@ log
 /erlang_releases/ssk_web/rel/
 /erlang_releases/ssk_web/relx
 /erlang_releases/ssk_web/.erlang.mk.packages.v2
+/docker_images/base/derived/ssk_web/rel/
