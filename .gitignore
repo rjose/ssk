@@ -10,3 +10,7 @@ rel/example_project
 .rebar
 *~
 log
+/erlang_releases/ssk_web/_rel/
+/erlang_releases/ssk_web/rel/
+/erlang_releases/ssk_web/relx
+/erlang_releases/ssk_web/.erlang.mk.packages.v2
