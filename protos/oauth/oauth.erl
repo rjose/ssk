@@ -10,7 +10,7 @@ get_access_token(RequestToken) ->
 	Header = [],
 	Type = "application/x-www-form-urlencoded",
 	ClientId = "173156479681-981h8uit78nfgkkhtuk842jb2t6v6oae.apps.googleusercontent.com",
-	ClientSecret = "",
+	ClientSecret = "jE-EsKx90D3OlmKAr-dt6cm6",
 	Body = io_lib:format("grant_type=authorization_code&code=~s&client_id=~s&client_secret=~s&redirect_uri=urn:ietf:wg:oauth:2.0:oob", [RequestToken, ClientId, ClientSecret]),
 	
 	HTTPOptions = [],
