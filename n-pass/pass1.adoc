@@ -16,11 +16,11 @@ be mounted dynamically into an image.
 == Tasks
 - [x] Copy initial base Dockerfile from previous ssk attempt
 - [x] Set up toplevel Makefile
-- [ ] Organize top level makefile
-- [ ] Format help message
+- [x] Organize top level makefile
+- [x] Format help message
 
 == Status
-Effort spent: 1.3h
+Effort spent: 2.3h
 Effort left: 0.5h
 Initial estimate: 4 hours
 
