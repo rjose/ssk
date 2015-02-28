@@ -1,14 +1,32 @@
+
+BoldOn = \e[1m
+ItalicOn = \e[3m
+Normal = \e[0m
+
 #-------------------------------------------------------------------------------
 # Prints help message
 #-------------------------------------------------------------------------------
 .PHONY: help
 help:
-	@echo "help: Shows this message"
-	@echo "docker-base: Builds base docker image"
-	@echo "run: n=<name> i=<docker image>, runs a docker image"
-	@echo "shell: n=<name>, starts shell in running docker container"
-	@echo "stop: n=<name>, stops a docker container"
-	@echo "clean-images: Removes all docker containers and images"
+	@echo -e "\n${BoldOn}SSK Make Targets${Normal}"
+
+	@echo -e "\nMISC"
+	@echo -e "\t${BoldOn}help${Normal}:\t\tShows this message"
+	@echo -e "\t${BoldOn}clean-images${Normal}:\tRemoves all docker containers and images"
+
+	@echo -e "\nBUILDING DOCKER IMAGES\n"
+	@echo -e "\t${BoldOn}docker-base${Normal}:\tBuilds base docker image (for dev)"
+
+	@echo -e "\nRUNNING DOCKER CONTAINERS\n"
+	@echo -e "\t${BoldOn}run${Normal}:\t\tRuns a docker image"
+	@echo -e "\t\t\t${ItalicOn}make n=base i=sskit/base:1 run${Normal}\n"
+
+	@echo -e "\t${BoldOn}shell${Normal}:\t\tStarts shell in running docker container"
+	@echo -e "\t\t\t${ItalicOn}make n=base shell${Normal}\n"
+
+	@echo -e "\t${BoldOn}stop${Normal}:\t\tStops a docker container"
+	@echo -e "\t\t\t${ItalicOn}make n=base stop${Normal}\n"
+
 
 #-------------------------------------------------------------------------------
 # Runs an image

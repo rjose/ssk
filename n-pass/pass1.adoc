@@ -14,15 +14,15 @@ toplevel Makefile. For service development, release directories will
 be mounted dynamically into an image.
 
 == Tasks
-- [ ] Copy initial base Dockerfile from previous ssk attempt
-- [ ] Set up toplevel Makefile
+- [x] Copy initial base Dockerfile from previous ssk attempt
+- [x] Set up toplevel Makefile
 - [ ] Organize top level makefile
+- [ ] Format help message
 
 == Status
+Effort spent: 1.3h
+Effort left: 0.5h
 Initial estimate: 4 hours
-
-Effort spent: 1h
-Effort left: 2h
 
 == Log
 
