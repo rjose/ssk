@@ -1,1 +1,0 @@
-sudo docker build -t spreadsheetkit/monitor:1.1 .

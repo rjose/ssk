@@ -1,3 +1,0 @@
-#!/bin/sh
-
-HOME=/app exec /app/ssk_web/ssk_web_release/bin/ssk_web_release foreground

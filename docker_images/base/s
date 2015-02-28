@@ -1,3 +1,0 @@
-# The argument is the container ID from "sudo docker ps"
-
-sudo docker exec -it $1 /bin/bash

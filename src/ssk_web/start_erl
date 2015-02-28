@@ -1,3 +1,0 @@
-#!/bin/bash
-
-erl -pa ebin -pa apps/*/ebin -boot start_sasl -eval "application:start(ssk_web)"

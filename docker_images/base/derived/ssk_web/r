@@ -1,2 +1,0 @@
-#sudo docker run --name ssk_web --link monitor:monitor --rm -t -i spreadsheetkit/dev:1.1
-sudo docker run -p 127.0.0.1:8080:8080 --name ssk_web --rm -t -i spreadsheetkit/ssk_web:1.1
