@@ -96,7 +96,9 @@ help:
 
 	@echo -e "\nMISC"
 	@echo -e "\t${BoldOn}help${Normal}:\t\tShows this message"
+	@echo -e "\t${BoldOn}doc${Normal}:\t\tBuilds ssk documentation (n-pass and spec)"
 	@echo -e "\t${BoldOn}clean-images${Normal}:\tRemoves all docker containers and images"
+	@echo -e "\t${BoldOn}clean-doc${Normal}:\tRemoves generated doc files"
 
 	@echo -e "\nBUILDING DOCKER IMAGES"
 	@echo -e "\t${BoldOn}docker-base${Normal}:\tBuilds base docker image (for dev)"
@@ -116,6 +118,22 @@ help:
 	@echo -e "\t${BoldOn}shell-base${Normal}:\tStarts shell into a container named 'base'"
 	@echo -e "\t${BoldOn}stop-base${Normal}:\tStops container named 'base'"
 
+
+#-------------------------------------------------------------------------------
+# Builds all documentation
+#
+# Some will be under n-pass, some will be under spec.
+#-------------------------------------------------------------------------------
+.PHONY: doc
+doc:
+	asciidoctor ./n-pass/index.adoc
+
+#-------------------------------------------------------------------------------
+# Removes generated doc files
+#-------------------------------------------------------------------------------
+.PHONY: clean-doc
+clean-doc:
+	rm ./n-pass/*.html
 
 #-------------------------------------------------------------------------------
 # Removes all docker images

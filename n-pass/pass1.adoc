@@ -20,8 +20,8 @@ be mounted dynamically into an image.
 - [x] Format help message
 
 == Status
-Effort spent: 2.3h
-Effort left: 0.5h
+Effort spent: 2.6h
+Effort left: 0h
 Initial estimate: 4 hours
 
 == Log
@@ -54,4 +54,70 @@ Let's try debian 7.8 instead of 8.0. Yes, that worked.
 
 ** 06:34 (52 min) << Let's take a break
 After the break, I'll install runit and syslog
+
+** 06:53 >> Install runit and syslog
+I think we can configure syslog in a derived container. We'll set it
+up to run automatically, though.
+
+** 06:55 (2 min) Use runit_bootstrap trick
+Not sure if I need this, but I'll export all environment variables to
+/etc/envars so they can be picked up by runit when the container is
+run. This will be done by the runit_bootstrap script.
+
+** 06:59 (6 min) Set entry point for container
+We want runit to start when the conatiner is started. Once we do this,
+I think we'll need to add a "shell" target to get into the
+container. We'll also need a target to kill the container.
+
+** 07:01 (8 min) Add shell target
+
+** 07:06 (13 min) Got "make shell" working
+Let's add the stop target next
+
+** 07:09 (16 min) Ready to check in
+Let's check in what we have and then take a break. After the break,
+I'll clean up my Makefile a bit.
+
+
+** 07:14 << (21 min) Checked in
+
+** 07:14 Take a break
+OK, let's take a break. Afterwards, we'll clean up the makefile (and
+its help target).
+
+** 10:24 >> Let's keep track of effort left and effort spent in a spreadsheet
+OK, got this in place. Let's organize my makefile next.
+
+** 10:37 (13 min) Looked at tput, but let's just keep it simple.
+
+** 10:43 (19 min) Figured out bold sequences
+I guess there's just a character sequence for doing this.
+
+** 10:44 (20 min) Clean up message
+
+** 11:04 (40 min) Figured out how to style the message
+Let's get everything styled up and then take a break.
+
+** 11:10 (46 min) Styled the makefile help message
+Let's check in.
+
+** 11:11 (47 min) Tidy up makefile
+
+** 11:24 << (60 min) Done tidying up
+Let's check in real quick and then call this done.
+
+** 11:26 Take a break
+When we get back, I'll add a stop-base target and then we can check in.
+
+** 12:06 << Check in
+Let's check in and then think a little about how to build documentation.
+
+** 12:08 (2 min) Think about docs
+
+** 12:25 (17 min) Create doc target
+
+** 12:30 << (22 min) Let's close this out
+I'll update the pass1.adoc file and the tracking spreadsheet and then
+call this done.
+
 ----

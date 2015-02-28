@@ -1,10 +1,7 @@
 = n-pass index
+ssk development passes
 
-The following describes the n-passes. Active n-passes are at the
-top in the order in which they will be done; completed ones are at the
-bottom in reverse order.
-
-* Pass 1: Create a base docker image
+* [x] Pass 1: Create a base docker image
 * Pass 2: Set up a monitor container with kibana on it
 * Pass 3: Create an elixir release that runs in a container
 * Pass 4: Set up a web server application (with logging)
@@ -31,6 +28,7 @@ bottom in reverse order.
 * Pass 25: Write special columns/rows to user spreadsheets
 * Pass 26: Create a WorkGraph app based on StaffAccounting and
   ProjectPlan
-  
 
-== Completed passes
+== Passes
+
+include::pass1.adoc[leveloffset=+2]
