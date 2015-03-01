@@ -22,7 +22,7 @@ RUN apt-get install -y elixir
 RUN apt-get install -y runit
 
 # Bootstrap the environment variables
-COPY ./to_copy/runit_bootstrap /usr/sbin/runit_bootstrap
+COPY ./to_copy/usr/sbin/runit_bootstrap /usr/sbin/runit_bootstrap
 
 # Install syslog-ng
 RUN apt-get install -y syslog-ng
@@ -30,5 +30,10 @@ RUN apt-get install -y syslog-ng
 # Update syslog-ng config to uncomment "SYSLOGNG_OPTS" line
 # (This prevents an error message)
 RUN sed -i 's/^#\(SYSLOGNG_OPTS="--no-caps"\)/\1/g' /etc/default/syslog-ng
+
+# Add syslog-ng to runit
+RUN mkdir -p /etc/service/syslog-ng/
+COPY ./to_copy/etc/service/syslog-ng/run /etc/service/syslog-ng/run
+
 
 ENTRYPOINT ["/usr/sbin/runit_bootstrap"]
