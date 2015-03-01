@@ -1,0 +1,80 @@
+= Pass 2: Set up a monitor container
+
+Create a docker container with kibana on it.
+
+Also create a dev container that has a syslog-ng client running
+on it. The demo is to log something in the dev container and have it
+show up in the kibana UI on the monitor.
+
+The dev containers should be set up so the syslog-ng client sends data
+to the monitor node. We'll use docker linking to link the dev
+containers with the monitor container. We'll have to assume that the
+monitor container will always be running before the dev containers. To
+do this, we should create a new make target that spins up a monitor
+container and then whatever dev containers we need. This will be a
+model for all development going forward (I think).
+
+All dev nodes send syslog-ng messages to monitor:1000.
+
+
+== Tasks
+- [ ] Create Dockerfile for dev
+- [ ] Create Dockerfile for monitor
+- [ ] Spin up monitor and 2 dev containers
+- [ ] Create syslog-ng messages on each dev container and see it show
+  up in the monitor log
+- [ ] Set up logstash on the monitor node
+- [ ] Set up kibana on the monitor node
+- [ ] Send log messages of different levels and see them in kibana
+
+== Status
+Effort spent: 1h
+Effort left: 9h
+Initial estimate: 10h
+
+== Log
+
+=== Saturday, 02/28/2015
+
+----
+** 19:55 >> Create Dockerfile for dev
+We'll create a subdirectory under docker/base called "dervied" and
+copy the old dev Dockerfile into it.
+
+** 20:07 (12 min) Configure syslog-ng
+I'm creating the Dockerfile. Let's look closely at the syslog-ng.conf
+file and make sure it's simple (and correct). The run file was
+constructed by looking at the /etc/service.d script for syslog-ng and
+pulling out the relevant pieces.
+
+
+** 20:25 (30 min) I see why I didn't get the various log levels
+There was a filter in the log statement. Duh.
+
+** 20:25 (30 min) Build dev image
+Let's build the dev image and see if we can create some log messages.
+
+** 20:31 (36 min) Decided to move all docker images to top level
+The nesting just seemed to complicated.
+
+** 20:32 (37 min) Built dev image
+Let's give it a spin. Looks like I have an older version of
+syslog-ng. Let's try building the image again.
+
+** 20:44 (49 min) Got syslog running
+But it's not running as part of runit yet. Also, I don't know how to
+see the priority.
+
+
+** 20:58 (63 min) I understand the syslog config more
+I've been looking at /var/log/messages for entries from
+"logger". However, these messages are being filtered from s_src by
+their level and routed to different files. Since we're not filtering
+messages when sending to d_monitor, we should be seeing all messages.
+
+** 21:01 << (66 min) Need to make sure runit starts syslog properly
+
+** 21:03 Take a break
+I need to take a closer look at the run script. This seems not to work
+via runit. Let's copy the init.d file over for syslog-ng and examine it.
+----

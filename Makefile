@@ -22,6 +22,14 @@ docker-base:
 	docker build -t sskit/base:1 ./docker/base
 
 
+#-------------------------------------------------------------------------------
+# Builds dev image
+#-------------------------------------------------------------------------------
+.PHONY: docker-dev
+docker-dev:
+	docker build -t sskit/dev:1 ./docker/dev
+
+
 #=======================================
 # Targets: Running docker containers
 #=======================================
@@ -82,6 +90,12 @@ shell-base:
 stop-base:
 	make n=base stop
 
+#-------------------------------------------------------------------------------
+# Runs "dev" container
+#-------------------------------------------------------------------------------
+.PHONY: run-dev
+run-dev:
+	docker run --name dev --rm -v `pwd`:/working -i -t sskit/dev:1
 
 #=======================================
 # Targets: Misc
