@@ -20,9 +20,9 @@ be mounted dynamically into an image.
 - [x] Format help message
 
 == Status
-Effort spent: 2.6h
-Effort left: 0h
-Initial estimate: 4 hours
+- Effort spent: 2.6h
+- Effort left: 0h
+- Initial estimate: 4 hours
 
 == Log
 

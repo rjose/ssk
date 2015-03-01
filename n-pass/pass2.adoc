@@ -18,7 +18,7 @@ All dev nodes send syslog-ng messages to monitor:1000.
 
 
 == Tasks
-- [ ] Create Dockerfile for dev
+- [x] Create Dockerfile for dev
 - [ ] Create Dockerfile for monitor
 - [ ] Spin up monitor and 2 dev containers
 - [ ] Create syslog-ng messages on each dev container and see it show
@@ -28,9 +28,9 @@ All dev nodes send syslog-ng messages to monitor:1000.
 - [ ] Send log messages of different levels and see them in kibana
 
 == Status
-Effort spent: 1h
-Effort left: 9h
-Initial estimate: 10h
+- Effort spent: 1.75h
+- Effort left: 8h
+- Initial estimate: 10h
 
 == Log
 
@@ -77,4 +77,28 @@ messages when sending to d_monitor, we should be seeing all messages.
 ** 21:03 Take a break
 I need to take a closer look at the run script. This seems not to work
 via runit. Let's copy the init.d file over for syslog-ng and examine it.
+
+** 22:05 >> Mount current directory into /working
+Let's mount the working directory of the dev container into
+/working. That will give us a way to copy files.
+
+** 22:13 (8 min) Got the directory mounted
+Let's take a look at the syslog-ng file and see what we can pull out.
+
+** 22:37 (32 min) Got syslog running properly
+Alright, this looks pretty good. Let's check in. I think we should
+have the base container start syslog, though. That way, we'll only
+need to copy the syslog-ng.conf file over.
+
+*** TODO Clean up makefile again
+
+** 22:49 (44 min) Cleaned up Dockerfiles
+OK, this is much better. The base container doesn't have a valid
+syslog-ng configuration, but that's OK for now. I'll fix it later.
+
+*** TODO Add valid config file for sskit/base
+
+** 22:50 (45 min) Let's check in
+Let's get these changes in and call it a night.
+
 ----
