@@ -19,17 +19,17 @@ All dev nodes send syslog-ng messages to monitor:1000.
 
 == Tasks
 - [x] Create Dockerfile for dev
-- [ ] Create Dockerfile for monitor
+- [-] Create Dockerfile for monitor
 - [ ] Spin up monitor and 2 dev containers
-- [ ] Create syslog-ng messages on each dev container and see it show
+- [x] Create syslog-ng messages on each dev container and see it show
   up in the monitor log
 - [ ] Set up logstash on the monitor node
 - [ ] Set up kibana on the monitor node
 - [ ] Send log messages of different levels and see them in kibana
 
 == Status
-- Effort spent: 1.75h
-- Effort left: 8h
+- Effort spent: 2.75h
+- Effort left: 5h
 - Initial estimate: 10h
 
 == Log
@@ -100,5 +100,48 @@ syslog-ng configuration, but that's OK for now. I'll fix it later.
 
 ** 22:50 (45 min) Let's check in
 Let's get these changes in and call it a night.
+----
+
+=== Sunday, 03/01/2015
+
+----
+** 07:01 >> Set up Dockerfile for monitor
+Alright, let's create a new docker image for our monitor.
+
+** 07:07 (6 min) Building the monitor image
+OK, this is grabbing a whole bunch of stuff.
+
+** 07:11 (10 min) Error installing openjdk, so retrying
+Looks like there was a network issue. It seems to have grabbed what it
+needed now.
+
+** 07:14 (13 min) Installed main components
+Now, we need to copy some files over. Let's create a to_copy
+subdirectory and get things into place.
+
+** 07:22 (21 min) Updated syslog-ng config file
+Let's install it and give it a try.
+
+** 07:23 (22 min) Spin up a dev and monitor
+I think we'll need a make target for this. I want to spin up two
+containers and have them be linked.
+
+** 07:32 (31 min) Messed up the config file
+Let's try it again.
+
+** 07:46 << (46 min) Rebuilding again
+I updated the base to add "--no-caps" to its startup. No I have to
+rebuild monitor.
+
+** 10:08 >> Add config files
+Let's configure elasticsearch next.
+
+** 10:13 << (5 min) Copied the elasticsearch.yml file over
+
+** 20:04 >> Set up elasticsearch
+Let's copy the config file over and then add it elasticsearch to runit
+
+** 20:15 << (11 min) elasitcsearch is running
+Cool. Let's take a quick coffee break and then get logstash running.
 
 ----

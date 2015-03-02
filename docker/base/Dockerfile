@@ -35,5 +35,5 @@ RUN sed -i 's/^#\(SYSLOGNG_OPTS="--no-caps"\)/\1/g' /etc/default/syslog-ng
 RUN mkdir -p /etc/service/syslog-ng/
 COPY ./to_copy/etc/service/syslog-ng/run /etc/service/syslog-ng/run
 
-
+# Start runit
 ENTRYPOINT ["/usr/sbin/runit_bootstrap"]

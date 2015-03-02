@@ -12,4 +12,4 @@ mkdir -p /var/run/syslog-ng
 mkdir -p /var/lib/syslog-ng
 
 # Start syslog-ng
-exec syslog-ng -F --pidfile /var/run/syslog-ng.pid
+exec syslog-ng -F --pidfile /var/run/syslog-ng.pid --no-caps

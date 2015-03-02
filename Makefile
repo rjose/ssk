@@ -29,6 +29,12 @@ docker-base:
 docker-dev:
 	docker build -t sskit/dev:1 ./docker/dev
 
+#-------------------------------------------------------------------------------
+# Builds monitor image
+#-------------------------------------------------------------------------------
+.PHONY: docker-monitor
+docker-monitor:
+	docker build -t sskit/monitor:1 ./docker/monitor
 
 #=======================================
 # Targets: Running docker containers
@@ -44,6 +50,17 @@ docker-dev:
 .PHONY: run
 run:
 	docker run --name ${n} --rm -i -t ${i}
+
+#-------------------------------------------------------------------------------
+# Like run, but mounts current directory into /working
+#
+# CL Args:
+#    * n: name of container (like "monitor")
+#    * i: name of docker image (like "sskit/base:1")
+#-------------------------------------------------------------------------------
+.PHONY: dev-run
+dev-run:
+	docker run --name ${n} --rm -v `pwd`:/working -i -t ${i}
 
 #-------------------------------------------------------------------------------
 # Runs shell in existing docker container
@@ -66,36 +83,20 @@ stop:
 	docker stop ${n}
 
 #=======================================
-# Targets: For convenience
+# Targets: n-pass
+#
+# Sets up containers for each pass
 #=======================================
 
-#-------------------------------------------------------------------------------
-# Runs base image
-#-------------------------------------------------------------------------------
-.PHONY: run-base
-run-base:
-	make n=base i=sskit/base:1 run
+.PHONY: pass-2-start
+pass-2-start:
+	sudo docker run -p 127.0.0.1:9292:9292 -p 127.0.0.1:9200:9200 --name monitor --rm sskit/monitor:1&
+	sudo docker run --name dev1 --link monitor:monitor --rm sskit/dev:1&
+	sudo docker run --name dev2 --link monitor:monitor --rm sskit/dev:1&
 
-#-------------------------------------------------------------------------------
-# Starts shell into container named "base"
-#-------------------------------------------------------------------------------
-.PHONY: shell-base
-shell-base:
-	make n=base shell
-
-#-------------------------------------------------------------------------------
-# Stops container named "base"
-#-------------------------------------------------------------------------------
-.PHONY: stop-base
-stop-base:
-	make n=base stop
-
-#-------------------------------------------------------------------------------
-# Runs "dev" container
-#-------------------------------------------------------------------------------
-.PHONY: run-dev
-run-dev:
-	docker run --name dev --rm -v `pwd`:/working -i -t sskit/dev:1
+.PHONY: pass-2-stop
+pass-2-stop:
+	sudo docker stop monitor dev1 dev2
 
 #=======================================
 # Targets: Misc
@@ -111,15 +112,20 @@ help:
 	@echo -e "\nMISC"
 	@echo -e "\t${BoldOn}help${Normal}:\t\tShows this message"
 	@echo -e "\t${BoldOn}doc${Normal}:\t\tBuilds ssk documentation (n-pass and spec)"
-	@echo -e "\t${BoldOn}clean-images${Normal}:\tRemoves all docker containers and images"
 	@echo -e "\t${BoldOn}clean-doc${Normal}:\tRemoves generated doc files"
+	@echo -e "\t${BoldOn}clean-images${Normal}:\tRemoves all docker containers and images"
 
-	@echo -e "\nBUILDING DOCKER IMAGES"
-	@echo -e "\t${BoldOn}docker-base${Normal}:\tBuilds base docker image (for dev)"
+	@echo -e "\nDOCKER IMAGES"
+	@echo -e "\t${BoldOn}docker-base${Normal}:\tBuilds 'base' docker image (for dev)"
+	@echo -e "\t${BoldOn}docker-dev${Normal}:\tBuilds 'dev' docker image"
+	@echo -e "\t${BoldOn}docker-monitor${Normal}:\tBuilds 'monitor' docker image"
 
-	@echo -e "\nRUNNING DOCKER CONTAINERS"
+	@echo -e "\nDOCKER CONTAINERS"
 	@echo -e "\t${BoldOn}run${Normal}:\t\tRuns a docker image"
 	@echo -e "\t\t\t${ItalicOn}make n=base i=sskit/base:1 run${Normal}\n"
+
+	@echo -e "\t${BoldOn}dev-run${Normal}:\tRuns a docker image, mounting working directory in /working"
+	@echo -e "\t\t\t${ItalicOn}make n=base i=sskit/base:1 dev-run${Normal}\n"
 
 	@echo -e "\t${BoldOn}shell${Normal}:\t\tStarts shell in running docker container"
 	@echo -e "\t\t\t${ItalicOn}make n=base shell${Normal}\n"
@@ -127,10 +133,9 @@ help:
 	@echo -e "\t${BoldOn}stop${Normal}:\t\tStops a docker container"
 	@echo -e "\t\t\t${ItalicOn}make n=base stop${Normal}"
 
-	@echo -e "\nFOR DEVELOPMENT"
-	@echo -e "\t${BoldOn}run-base${Normal}:\tRuns sskit/base image in a container named 'base'"
-	@echo -e "\t${BoldOn}shell-base${Normal}:\tStarts shell into a container named 'base'"
-	@echo -e "\t${BoldOn}stop-base${Normal}:\tStops container named 'base'"
+	@echo -e "\nN-PASS"
+	@echo -e "\t${BoldOn}pass2${Normal}:\t\tStarts 'monitor', 'dev1', and 'dev2'"
+	@echo
 
 
 #-------------------------------------------------------------------------------
