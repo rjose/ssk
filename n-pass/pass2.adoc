@@ -28,8 +28,8 @@ All dev nodes send syslog-ng messages to monitor:1000.
 - [ ] Send log messages of different levels and see them in kibana
 
 == Status
-- Effort spent: 2.75h
-- Effort left: 5h
+- Effort spent: 3.25h
+- Effort left: 4h
 - Initial estimate: 10h
 
 == Log
@@ -143,5 +143,34 @@ Let's copy the config file over and then add it elasticsearch to runit
 
 ** 20:15 << (11 min) elasitcsearch is running
 Cool. Let's take a quick coffee break and then get logstash running.
+
+
+** 20:42 >> Get logstash running next
+Let's get the config files copied over and make sure they make sense.
+
+** 20:51 (9 min) Have logstash config in place
+Let's give it a spin.
+
+** 20:54 (12 min) Logged a message locally and saw it show up.
+
+Let's get kibana running next and then take a break.
+
+** 20:56 (14 min) Need to expose port 9292 for kibana
+Let's check the run script I had from before.
+
+** 21:02 (20 min) Kibana is rendering logstash data!
+
+*** TODO Ensure that the /var/log/messages file in monitor is persistent
+
+** 21:04 (22 min) Run dev and try logging message
+
+*** TODO Scrub makefile
+
+** 21:09 (27 min) Can log a message in a dev container and see it show up
+The heart of this is basically done. What's missing is getting the
+priority of the messages. Let's look into that next.
+
+** 21:11 << (29 min) Let's check in
+Let's check in what we have and then scrub the Makefile after a break.
 
 ----
