@@ -2,7 +2,7 @@
 ssk development passes
 
 * [x] Pass 1: Create a base docker image
-* Pass 2: Set up a monitor container with kibana on it
+* [x] Pass 2: Set up a monitor container with kibana on it
 * Pass 3: Create an elixir release that runs in a container
 * Pass 4: Set up a web server application (with logging)
 * Pass 5: Add authentication with Google+
