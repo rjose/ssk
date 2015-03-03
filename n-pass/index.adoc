@@ -31,6 +31,7 @@ ssk development passes
 
 == Passes
 
+include::pass2.adoc[leveloffset=+2]
+
 include::pass1.adoc[leveloffset=+2]
 
-include::pass2.adoc[leveloffset=+2]

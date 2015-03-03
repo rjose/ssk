@@ -29,12 +29,12 @@ whatever files it needs to render data) is persisted.
 - [x] Set up logstash on the monitor node
 - [x] Set up kibana on the monitor node
 - [x] Send log messages of different levels and see them in kibana
-- [ ] Filter messages based on log level
+- [x] Filter messages based on log level
 - [x] Make monitor log persistent
 
 == Status
-- Effort spent: 3.25h
-- Effort left: 4h
+- Effort spent: 5.75h
+- Effort left: 0h
 - Initial estimate: 10h
 
 == Log
@@ -177,5 +177,82 @@ priority of the messages. Let's look into that next.
 
 ** 21:11 << (29 min) Let's check in
 Let's check in what we have and then scrub the Makefile after a break.
+----
+
+
+=== Monday, 03/02/2015
+----
+
+** 16:11 >> Clean up makefile
+Let's clean up the makefile and then see if we can spin up 2 dev
+containers and 1 monitor.
+
+** 16:15 (4 min) Got messages from each container to the monitor!
+Looks good. Got messages from the containers. We need to figure out
+how to get the meta data to the containers. For instance, the log
+level isn't being captured and the host is being set to the docker
+container ID.
+
+** 16:22 (11 min) Priority is being sent
+I do see the priority coming through as an integer in angle
+brackets. <13> means info; <11> is error <9> is alert. I think this
+combines the user facility (being 1) * 8 + the level.
+
+** 16:24 << (13 min) Check in
+Let's check in and then take a little break.
+
+** 16:43 >> Make log persistent
+
+** 16:47 (4 min) 
+
+Let's try mounting the working directory into /monitor directory in
+the monitor container. We should symlink /var/log/messages to /working
+
+** 16:58 <<(15 min) Logfile is persisted
+The logfile is persisted but it's not being read in by logstash. How
+do we get it to read the old things, too?
+
+** 17:15 >> Try specifying the the start_position in the logstash config
+
+** 17:17 (2 min) Looks good!
+
+** 17:18 (3 min) Now, let's try to get the priority out.
+
+** 17:39 <<(24 min) The grok patterns for logstash
+Here's the URL:
+https://github.com/elasticsearch/logstash/blob/v1.4.0/patterns/grok-patterns
+
+
+Here's a sample log
+
+'Mar  3 00:58:25 172.17.0.109 89 <13>1 2015-03-03T00:58:25+00:00 dev1
+logger - - [meta sequenceId="3"] Can you read this?'
+
+
+** 18:50 >> Let's get the grok pattern correct
+This works:
+
+"%{MONTH}%{SPACE}%{MONTHDAY} %{HOUR}:%{MINUTE}:%{SECOND} %{IP:ip} %{POSINT} <%{POSINT:priority}>%{POSINT} %{TIMESTAMP_ISO8601} %{DATA:client_host} %{DATA:app} %{GREEDYDATA:syslog_message}"
+
+** 19:58 << (68 min) Wow, getting that pattern right was hard
+
+** 19:59 Take a break
+Let's check in and then take a break. Afterwards, I want to map the
+priority to a priority_label.
+
+** 20:05 >> The syslog priorities
+
+   * Debug: 15, user.debug
+   * Info: 14, user.info
+   * Notice: 13, user.notice
+   * Warning: 12, user.warning
+   * Error: 11, user.error
+   * Critical: 10, user.crit
+   * Alert: 9, user.alert
+   * Panic: 8, user.panic
+   * Emergency: 8, user.emerg
+
+** 20:25 << (20 min) Done
+OK, I think we're done with Pass 2!
 
 ----
