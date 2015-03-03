@@ -16,16 +16,20 @@ model for all development going forward (I think).
 
 All dev nodes send syslog-ng messages to monitor:1000.
 
+The monitor node needs to ensure that its /var/log/messages file (or
+whatever files it needs to render data) is persisted.
+
 
 == Tasks
 - [x] Create Dockerfile for dev
-- [-] Create Dockerfile for monitor
-- [ ] Spin up monitor and 2 dev containers
+- [x] Create Dockerfile for monitor
+- [x] Spin up monitor and 2 dev containers
 - [x] Create syslog-ng messages on each dev container and see it show
   up in the monitor log
-- [ ] Set up logstash on the monitor node
-- [ ] Set up kibana on the monitor node
-- [ ] Send log messages of different levels and see them in kibana
+- [x] Set up logstash on the monitor node
+- [x] Set up kibana on the monitor node
+- [x] Send log messages of different levels and see them in kibana
+- [ ] Filter messages based on log level
 
 == Status
 - Effort spent: 3.25h

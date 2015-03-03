@@ -88,15 +88,25 @@ stop:
 # Sets up containers for each pass
 #=======================================
 
-.PHONY: pass-2-start
-pass-2-start:
-	sudo docker run -p 127.0.0.1:9292:9292 -p 127.0.0.1:9200:9200 --name monitor --rm sskit/monitor:1&
-	sudo docker run --name dev1 --link monitor:monitor --rm sskit/dev:1&
-	sudo docker run --name dev2 --link monitor:monitor --rm sskit/dev:1&
+#-------------------------------------------------------------------------------
+# Starts containers for pass2
+#
+# This runs two dev containers (dev1 and dev2) and starts up a
+# monitor, exposing port 9292 for kibana and port 9200 so kibana can
+# make HTTP requests of elasticsearch.
+# -------------------------------------------------------------------------------
+.PHONY: pass2-start
+pass2-start:
+	docker run -p 127.0.0.1:9292:9292 -p 127.0.0.1:9200:9200 --name monitor --rm sskit/monitor:1&
+	docker run --name dev1 --hostname=dev1 --link monitor:monitor --rm sskit/dev:1&
+	docker run --name dev2 --hostname=dev2 --link monitor:monitor --rm sskit/dev:1&
 
-.PHONY: pass-2-stop
-pass-2-stop:
-	sudo docker stop monitor dev1 dev2
+#-------------------------------------------------------------------------------
+# Stops pass2 containers
+#-------------------------------------------------------------------------------
+.PHONY: pass2-stop
+pass2-stop:
+	docker stop monitor dev1 dev2
 
 #=======================================
 # Targets: Misc
@@ -134,7 +144,8 @@ help:
 	@echo -e "\t\t\t${ItalicOn}make n=base stop${Normal}"
 
 	@echo -e "\nN-PASS"
-	@echo -e "\t${BoldOn}pass2${Normal}:\t\tStarts 'monitor', 'dev1', and 'dev2'"
+	@echo -e "\t${BoldOn}pass2-start${Normal}:\tStarts 'monitor', 'dev1', and 'dev2'"
+	@echo -e "\t${BoldOn}pass2-stop${Normal}:\tStops 'monitor', 'dev1', and 'dev2'"
 	@echo
 
 
