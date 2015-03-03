@@ -97,7 +97,9 @@ stop:
 # -------------------------------------------------------------------------------
 .PHONY: pass2-start
 pass2-start:
-	docker run -p 127.0.0.1:9292:9292 -p 127.0.0.1:9200:9200 --name monitor --rm sskit/monitor:1&
+	docker run -p 127.0.0.1:9292:9292 -p 127.0.0.1:9200:9200 --name monitor --hostname=monitor \
+		-v `pwd`:/working --rm sskit/monitor:1&
+	sleep 2
 	docker run --name dev1 --hostname=dev1 --link monitor:monitor --rm sskit/dev:1&
 	docker run --name dev2 --hostname=dev2 --link monitor:monitor --rm sskit/dev:1&
 

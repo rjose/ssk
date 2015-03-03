@@ -30,6 +30,7 @@ whatever files it needs to render data) is persisted.
 - [x] Set up kibana on the monitor node
 - [x] Send log messages of different levels and see them in kibana
 - [ ] Filter messages based on log level
+- [x] Make monitor log persistent
 
 == Status
 - Effort spent: 3.25h

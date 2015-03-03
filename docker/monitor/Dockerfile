@@ -42,3 +42,6 @@ COPY ./to_copy/etc/service/logstash/run /etc/service/logstash/run
 RUN mkdir -p /etc/service/kibana
 COPY ./to_copy/etc/service/kibana/run /etc/service/kibana/run
 
+# Create a /working directory so we can have the log file persist
+RUN mkdir /working
+RUN cd /var/log && ln -s /working/messages .
