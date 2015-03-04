@@ -1,0 +1,45 @@
+= Pass 3: Create elixir release
+
+Create a docker container that runs an elixir release.
+
+The goal of this is to work out the elixir infrastructure tooling for
+creating a release. One option we'll look into is exrm:
+https://github.com/bitwalker/exrm. This is described a bit in this
+post: http://bitwalker.org/blog/2014/03/20/releases-for-elixir/.
+
+Not only do we need to create a release, but we need to have it
+runnable by runit.
+
+We also need lager set up so we can log messages from the applications
+running in the release. We'll test this by creating some functions
+that will log messages of varying levels and then attach to a running
+erlang node and execute them.
+
+We'll need to create a pass3 make target that spins up a monitor
+container and an elixir-dev container. The elixir-dev container needs
+to be built from the makefile. It should be self-contained in the
+sense that it can be run from anywhere without having any external
+elixir code available. The make target should build the release and
+then run the dockerfile to create the image. This target should take a
+version to set for the image.
+
+
+== Tasks
+- [x] Build an empty elixir release with exrm
+- [ ] Set up logging for elixir (see https://github.com/khia/exlager?)
+- [ ] Create Dockerfile for elixir release
+- [ ] Create module that can log messages
+- [ ] Create Makefile target to run pass3
+- [ ] Have elixir release periodically sends log messages when it runs
+
+== Status
+- Effort spent: 0h
+- Effort left: 0h
+- Initial estimate: 5h
+
+== Log
+
+=== Saturday, 02/28/2015
+
+----
+----

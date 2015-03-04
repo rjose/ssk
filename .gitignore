@@ -16,3 +16,6 @@ log
 /erlang_releases/ssk_web/.erlang.mk.packages.v2
 /docker_images/base/derived/ssk_web/rel/
 /n-pass/*.html
+/messages
+/n-pass/pass3/mix.lock
+/n-pass/pass3/rel/
