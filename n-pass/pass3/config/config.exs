@@ -22,3 +22,39 @@ use Mix.Config
 # here (which is why it is important to import them last).
 #
 #     import_config "#{Mix.env}.exs"
+
+#config :logger, [
+#	level: :debug,
+#	backends: [Logger.Backends.Syslog, :console],
+#	syslog: [facility: :local1, port: 1999, appid: "PASS3"]
+#]
+
+
+
+config :lager, [
+	handlers: [
+		lager_console_backend: :info
+		#[{:lager_console_backend, :info}]
+		#[{:lager_syslog_backend, ["pass3_app", :local1, :debug]}]
+	]
+]
+
+config :lager, [
+	handlers: [
+		lager_syslog_backend: ['pass3_app', :local1, :debug]
+	]
+]
+
+
+#{lager, [
+#  {log_root, "/var/log/hello"},
+#  {handlers, [
+#    {lager_console_backend, info},
+#    {lager_file_backend, [{file, "error.log"}, {level, error}]},
+#    {lager_file_backend, [{file, "console.log"}, {level, info}]}
+#  ]}
+#		]}.
+#
+#{handlers, [
+#  {lager_syslog_backend, ["riak", local1, info]},
+#] },

@@ -12,7 +12,9 @@ defmodule Pass3.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [applications: [:logger]]
+    [applications: [:syslog, :lager, :lager_syslog, :exlager],
+		 erl_opts: [parse_transform: "lager_transform"] 
+		]
   end
 
   # Dependencies can be Hex packages:
@@ -25,6 +27,11 @@ defmodule Pass3.Mixfile do
   #
   # Type `mix help deps` for more examples and options
   defp deps do
-		[{:exrm, "~> 0.15.1"}]
+		[
+				{:exrm, "~> 0.15.1"},
+				{:exlager, git: "https://github.com/khia/exlager.git"},
+				{:lager, git: "https://github.com/basho/lager.git", tag: "2.1.1", override: true},
+				{:lager_syslog, git: "https://github.com/basho/lager_syslog.git"}
+		]
   end
 end

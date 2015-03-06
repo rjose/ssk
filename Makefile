@@ -110,6 +110,24 @@ pass2-start:
 pass2-stop:
 	docker stop monitor dev1 dev2
 
+#-------------------------------------------------------------------------------
+# Starts containers for pass3
+# -------------------------------------------------------------------------------
+.PHONY: pass3-start
+pass3-start:
+	docker run -p 127.0.0.1:9292:9292 -p 127.0.0.1:9200:9200 --name monitor --hostname=monitor \
+		-v `pwd`:/working --rm sskit/monitor:1&
+	sleep 2
+	docker run -v `pwd`:/working --name dev1 --hostname=dev1 --link monitor:monitor --rm sskit/dev:1&
+
+
+#-------------------------------------------------------------------------------
+# Stops pass3 containers
+#-------------------------------------------------------------------------------
+.PHONY: pass3-stop
+pass3-stop:
+	docker stop monitor dev1
+
 #=======================================
 # Targets: Misc
 #=======================================

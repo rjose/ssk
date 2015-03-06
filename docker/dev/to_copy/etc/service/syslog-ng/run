@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+
+# Slam PATH
+PATH=/sbin:/bin:/usr/sbin:/usr/bin
+
+# Source any syslog-ng files
+[ -r /etc/default/syslog-ng ] && . /etc/default/syslog-ng
+
+# Create directories for PID file and persistence
+mkdir -p /var/run/syslog-ng
+mkdir -p /var/lib/syslog-ng
+
+# Start syslog-ng
+exec syslog-ng -F --pidfile /var/run/syslog-ng.pid --no-caps
