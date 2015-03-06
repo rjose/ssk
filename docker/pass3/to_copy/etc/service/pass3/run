@@ -1,0 +1,3 @@
+#!/bin/sh
+
+HOME=/releases exec /releases/bin/pass3 foreground

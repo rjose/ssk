@@ -19,3 +19,4 @@ log
 /messages
 /n-pass/pass3/mix.lock
 /n-pass/pass3/rel/
+*.tar.gz

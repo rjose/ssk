@@ -110,8 +110,18 @@ pass2-start:
 pass2-stop:
 	docker stop monitor dev1 dev2
 
+
+.PHONY: pass3-image
+pass3-image:
+	cd n-pass/pass3 && mix release
+	cp n-pass/pass3/rel/pass3/pass3-0.0.1.tar.gz docker/pass3/to_copy/releases
+	docker build -t sskit/pass3:1 ./docker/pass3
+
+
 #-------------------------------------------------------------------------------
 # Starts containers for pass3
+#
+# TODO: Run both containers with --net=host
 # -------------------------------------------------------------------------------
 .PHONY: pass3-start
 pass3-start:
@@ -166,6 +176,8 @@ help:
 	@echo -e "\nN-PASS"
 	@echo -e "\t${BoldOn}pass2-start${Normal}:\tStarts 'monitor', 'dev1', and 'dev2'"
 	@echo -e "\t${BoldOn}pass2-stop${Normal}:\tStops 'monitor', 'dev1', and 'dev2'"
+	@echo
+	@echo -e "\t${BoldOn}pass3-image${Normal}:\tBuilds an image with a pass3 release in it"
 	@echo
 
 
