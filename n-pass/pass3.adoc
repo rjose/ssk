@@ -26,12 +26,13 @@ version to set for the image.
 
 == Tasks
 - [x] Build an empty elixir release with exrm
-- [ ] Set up logging for elixir (see https://github.com/khia/exlager?)
+- [x] Set up logging for elixir (see https://github.com/khia/exlager?)
+- [ ] Set locale to utf-8 in dev container
 - [ ] Create Dockerfile for elixir release
 - [ ] Create module that can log messages
 - [ ] Create Makefile target to run pass3
 - [ ] Have elixir release periodically sends log messages when it runs
-- [ ] Set locale to utf-8 in dev container
+
 
 == Status
 - Effort spent: 1.75h
